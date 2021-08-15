@@ -16,7 +16,7 @@ public class TodoEntity {   // entity: table 자체인 class
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // mariaDB, mysql-> auto_increment
-    private Long id;
+    private Long id;        // int x , Long
 
     @Column(nullable = false)
     private String name;

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,5 +32,18 @@ class TodoRepositroyTest {
         });
 
     }
+
+    @Test
+    public void readTest() {
+//        var todoEntities = todoRepositroy.findAll();
+//        var todoEntity = todoRepositroy.findById(11L);
+        var allById = todoRepositroy.findAllById(Arrays.asList(1L, 2L, 3L));
+//        System.out.println("todoEntities: "+ todoEntities);
+//        System.out.println("todoEntitiy: "+ todoEntity.orElse(null));
+        System.out.println("allById: "+ allById);
+
+    }
+
+
 
 }
