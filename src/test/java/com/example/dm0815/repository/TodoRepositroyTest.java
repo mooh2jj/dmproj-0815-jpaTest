@@ -1,5 +1,6 @@
 package com.example.dm0815.repository;
 
+import com.example.dm0815.domain.Gender;
 import com.example.dm0815.domain.TodoEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,7 @@ class TodoRepositroyTest {
             TodoEntity todoEntity = TodoEntity.builder()
                     .name("dsg" + i)
                     .title("title.." + i)
+                    .gender(Gender.MALE)
                     .build();
             System.out.println(todoRepositroy.save(todoEntity));
 
