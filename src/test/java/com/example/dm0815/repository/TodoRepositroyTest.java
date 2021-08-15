@@ -21,13 +21,13 @@ class TodoRepositroyTest {
     @Autowired
     TodoRepositroy todoRepositroy;
 
-    @BeforeEach
+//    @BeforeEach
+    @Test
     public void createTest() {
         IntStream.rangeClosed(1,10).forEach( i ->{
             TodoEntity todoEntity = TodoEntity.builder()
                     .name("dsg" + i)
                     .title("title.." + i)
-                    .createdAt(LocalDateTime.now())
                     .build();
             System.out.println(todoRepositroy.save(todoEntity));
 
@@ -57,7 +57,6 @@ class TodoRepositroyTest {
                 .id(10L)
                 .name("updated name")
                 .title("updated title...")
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         System.out.println(todoRepositroy.save(todoEntity));

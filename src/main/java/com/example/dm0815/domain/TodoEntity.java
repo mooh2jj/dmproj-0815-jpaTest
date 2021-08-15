@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @Table(name = "todo")
-public class TodoEntity {   // entity: table 자체인 class
+public class TodoEntity extends BaseEntity {   // entity: table 자체인 class
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // mariaDB, mysql-> auto_increment
@@ -24,7 +24,7 @@ public class TodoEntity {   // entity: table 자체인 class
     @Column(nullable = false)
     private String title;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime updatedAt;
 
 }
