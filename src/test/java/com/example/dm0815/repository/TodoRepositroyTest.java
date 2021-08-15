@@ -1,6 +1,8 @@
 package com.example.dm0815.repository;
 
 import com.example.dm0815.domain.TodoEntity;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +21,7 @@ class TodoRepositroyTest {
     @Autowired
     TodoRepositroy todoRepositroy;
 
-    @Test
+    @BeforeEach
     public void createTest() {
         IntStream.rangeClosed(1,10).forEach( i ->{
             TodoEntity todoEntity = TodoEntity.builder()
@@ -33,6 +35,11 @@ class TodoRepositroyTest {
 
     }
 
+//    @AfterEach
+//    public void afterEach() {
+//        todoRepositroy.deleteAll();
+//    }
+
     @Test
     public void readTest() {
 //        var todoEntities = todoRepositroy.findAll();
@@ -42,6 +49,25 @@ class TodoRepositroyTest {
 //        System.out.println("todoEntitiy: "+ todoEntity.orElse(null));
         System.out.println("allById: "+ allById);
 
+    }
+
+    @Test
+    public void updateTest() {
+        TodoEntity todoEntity = TodoEntity.builder()
+                .id(10L)
+                .name("updated name")
+                .title("updated title...")
+                .updatedAt(LocalDateTime.now())
+                .build();
+
+        System.out.println(todoRepositroy.save(todoEntity));
+    }
+
+    @Test
+    public void deleteTest() {
+//        todoRepositroy.deleteAll();
+        todoRepositroy.deleteById(10L);
+//        todoRepositroy.deleteAllById(Arrays.asList(1L,3L));
     }
 
 
