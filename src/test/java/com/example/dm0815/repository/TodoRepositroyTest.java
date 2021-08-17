@@ -22,7 +22,7 @@ class TodoRepositroyTest {
     @Autowired
     TodoRepositroy todoRepositroy;
 
-//    @BeforeEach
+    //    @BeforeEach
     @Test
     public void createTest() {
         IntStream.rangeClosed(1,10).forEach( i ->{
@@ -55,13 +55,23 @@ class TodoRepositroyTest {
 
     @Test
     public void updateTest() {
-        TodoEntity todoEntity = TodoEntity.builder()
-                .id(10L)
-                .name("updated name")
-                .title("updated title...")
-                .build();
+//        TodoEntity todoEntity = TodoEntity.builder()
+//                .id(10L)
+//                .name("updated name")
+//                .title("updated title...")
+//                .build();
+        Optional<TodoEntity> result = todoRepositroy.findById(10L);
 
-        System.out.println(todoRepositroy.save(todoEntity));
+        if (result.isPresent()) {
+
+            TodoEntity todoEntity = result.get();
+
+            todoEntity.setName("xxx dsg");
+            todoEntity.setTitle("xxx title");
+
+            System.out.println(todoRepositroy.save(todoEntity));
+        }
+
     }
 
     @Test
