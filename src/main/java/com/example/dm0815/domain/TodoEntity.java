@@ -25,6 +25,7 @@ public class TodoEntity extends BaseEntity {   // entity: table 자체인 class
     private String title;
 
     @Enumerated(value = EnumType.STRING)    // default oridal 0,1
+    @Column(nullable = false)
     private Gender gender;
 
 //    private LocalDateTime createdAt;
