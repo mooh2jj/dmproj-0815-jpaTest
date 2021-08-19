@@ -5,8 +5,13 @@ import com.example.dm0815.domain.TodoEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
+import java.awt.print.Pageable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -38,12 +43,15 @@ class TodoRepositoryTest {
 
     @Test
     public void readTest() {
-//        var todoEntities = todoRepositroy.findAll();
-//        var todoEntity = todoRepositroy.findById(11L);
+//        var todoEntities = todoRepository.findAll();
+        var todoEntity = todoRepository.findById(11L);
         var allById = todoRepository.findAllById(Arrays.asList(1L, 2L, 3L));
 //        System.out.println("todoEntities: "+ todoEntities);
-//        System.out.println("todoEntitiy: "+ todoEntity.orElse(null));
+
+        List<TodoEntity> byName = todoRepository.findByName("dsg");
+        System.out.println("todoEntitiy: "+ todoEntity.orElse(null));
         System.out.println("allById: "+ allById);
+        System.out.println("byName: "+ byName);
 
     }
 
@@ -54,7 +62,7 @@ class TodoRepositoryTest {
 //                .name("updated name")
 //                .title("updated title...")
 //                .build();
-        Optional<TodoEntity> result = todoRepository.findById(10L);
+        Optional<TodoEntity> result = todoRepository.findById(10L);     // findById는 result -> Optional
 
         if (result.isPresent()) {
 
@@ -75,6 +83,22 @@ class TodoRepositoryTest {
 //        todoRepositroy.deleteAllById(Arrays.asList(1L,3L));
     }
 
+    @Test
+    public void pageTest() {
+        List<TodoEntity> entities = todoRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
+        System.out.println("entities: "+ entities);
 
+        Page<TodoEntity> todoEntities = todoRepository.findAll(PageRequest.of(1, 10, Sort.by("name").descending()));
+        System.out.println("todoEntities: "+ todoEntities.getPageable());
+        System.out.println("todoEntities: "+ todoEntities.getTotalElements());
+        System.out.println("todoEntities: "+ todoEntities.getTotalPages());
+        System.out.println("todoEntities: "+ todoEntities.getSort());
+
+    }
+
+    @Test
+    public void queryTest() {
+        todoRepository.findByTitle("1").forEach(System.out::println);
+    }
 
 }
