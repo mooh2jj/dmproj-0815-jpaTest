@@ -73,6 +73,14 @@ class TodoRepositoryTest {
 
             System.out.println(todoRepository.save(todoEntity));
         }
+//optional 안쓸 때
+//        var todoEntity = todoRepository.findById(10L).orElseThrow(RuntimeException::new);
+//
+//        if(todoEntity != null){
+//            todoEntity.setName("usususu");
+//
+//            todoRepository.save(todoEntity);
+//        }
 
     }
 
@@ -95,6 +103,17 @@ class TodoRepositoryTest {
         System.out.println("todoEntities: "+ todoEntities.getSort());
 
     }
+
+    @Test
+    void enumTest() {
+        var todoEntity = todoRepository.findById(1L).orElseThrow(RuntimeException::new);
+        todoEntity.setGender(Gender.FEMALE);
+
+        todoRepository.save(todoEntity);
+
+        todoRepository.findAll().forEach(System.out::println);
+    }
+
 
     @Test
     public void queryTest() {
