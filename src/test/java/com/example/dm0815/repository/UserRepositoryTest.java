@@ -36,14 +36,9 @@ class UserRepositoryTest {
     
     @Test
     void userRelationTest() {
-        User user = new User();
-        user.setName("dsgdsg");
-        user.setEmail("dsgdsg@fastcampus.com");
-        user.setGender(Gender.MALE);
-        userRepository.save(user);
 
         List<UserHistory> result = userHistoryRepository.findByUserId(
-            userRepository.findByEmail("dsgdsg@fastcampus.com").getId());
+            userRepository.findByEmail("title10@test.com").getId());
 
         result.forEach(System.out::println);
     }
