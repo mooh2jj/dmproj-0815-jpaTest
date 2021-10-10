@@ -46,10 +46,10 @@ class TodoControllerTest {
     @Test
     @DisplayName("indexTest")
     void index() throws Exception {
+
         // given
 
         // when&then
-
         mvc.perform(get("/index"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
@@ -59,11 +59,16 @@ class TodoControllerTest {
 
     @Test
     void create() throws Exception{
+
+        // given
+
+        // when
         when(this.todoService.add(any(TodoRequest.class)))
                 .then(i->{
                     TodoRequest todoRequest = i.getArgument(0, TodoRequest.class);
                     return new TodoEntity(this.expected.getId(),
-                            this.expected.getName(),
+//                            this.expected.getName(),
+                            todoRequest.getName(),
                             todoRequest.getTitle(),
                             todoRequest.getGender()
                             );
@@ -79,11 +84,15 @@ class TodoControllerTest {
 
         System.out.println("content: "+ content);
 
+        // then
         this.mvc.perform(post("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Any title"));
+                .andExpect(jsonPath("$.name").value("Any dsg"))
+                .andExpect(jsonPath("$.title").value("Any title"))
+                .andExpect(jsonPath("$.gender").value("FEMALE"))
+                .andDo(print());
 
     }
 
